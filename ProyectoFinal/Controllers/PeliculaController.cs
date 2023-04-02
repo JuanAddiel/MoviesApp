@@ -11,9 +11,21 @@ namespace ProyectoFinal.Controllers
     {
         ICRUDServices<Pelicula> _peliculaService;
 
+
         public PeliculaController(PeliculasContext dbContext)
         {
             _peliculaService = new CRUDServices<Pelicula>(dbContext);
+        }
+
+        [HttpGet("getPelicula/{id}")]
+        public async Task<ActionResult<Pelicula>> LeerPelicula(int id)
+        {
+            var resultado = await _peliculaService.GetById(id);
+            if (resultado == null)
+            {
+                return NotFound();
+            }
+            return Ok(resultado);
         }
 
         [HttpPost("createPelicula")]

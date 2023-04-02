@@ -16,6 +16,17 @@ namespace ProyectoFinal.Controllers
             _generoService = new CRUDServices<Genero>(dbContext);
         }
 
+        [HttpGet("getGenero/{id}")]
+        public async Task<ActionResult<Genero>> LeerGenero(int id)
+        {
+            var resultado = await _generoService.GetById(id);
+            if (resultado == null)
+            {
+                return NotFound();
+            }
+            return Ok(resultado);
+        }
+
         [HttpPost("createGenero")]
         public async Task<ActionResult<Genero>> CrearGenero( Genero genero)
         {

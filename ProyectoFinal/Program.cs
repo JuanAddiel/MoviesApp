@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServer<PeliculasContext>(builder.Configuration.GetConnectionString("MoviesPlayer"));
+builder.Services.AddDbContext<PeliculasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MoviesPlayer")));
 builder.Services.AddScoped<ICRUDServices<Genero>, CRUDServices<Genero>>();
 builder.Services.AddScoped<ICRUDServices<Pelicula>, CRUDServices<Pelicula>>();
 builder.Services.AddControllers(
@@ -22,18 +23,23 @@ options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Configure the HTTP request pipeline.
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<PeliculasContext>();
     context.Database.EnsureCreated();
 }
+
+
+// Configure the HTTP request pipeline.
 
 app.UseCors(a => a.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

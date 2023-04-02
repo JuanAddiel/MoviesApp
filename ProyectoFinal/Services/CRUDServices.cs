@@ -12,7 +12,10 @@ namespace ProyectoFinal.Services
             {
                 _dbContext = dbContext;
             }
-
+            public async Task<TEntity> GetById(int id)
+            {
+                return await _dbContext.Set<TEntity>().FindAsync(id);
+            }
             public async Task<TEntity> Create(TEntity entity)
             {
                 _dbContext.Set<TEntity>().Add(entity);

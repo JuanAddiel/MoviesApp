@@ -7,12 +7,16 @@ namespace ProyectoFinal.Model
     {
         public int Id { get; set; }
         public int GeneroId { get; set; }
+        public int UsuarioId { get; set; }
         public string Titulo { get; set; }
-        public DateTime Año { get; set; }
+        public DateTime Año { get ; set; }
         public string Director { get; set; }
  
         public string Imagen { get; set; }
+   
 
+        [JsonIgnore]
+        public Usuario Usuario { get; set; }
         [JsonIgnore]
         public Genero ?Genero { get; set; }
 
