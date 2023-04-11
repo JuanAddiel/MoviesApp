@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProyectoFinal.Contracts;
 using ProyectoFinal.Model;
 using ProyectoFinal.Services;
@@ -15,6 +16,8 @@ namespace ProyectoFinal.Controllers
         {
             _generoService = new CRUDServices<Genero>(dbContext);
         }
+       
+
 
         [HttpGet("getGenero/{id}")]
         public async Task<ActionResult<Genero>> LeerGenero(int id)
