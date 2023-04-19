@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NLWizsW7eOvuXCnVoPTNFIViHnhazuaTLFgTHO69OAM=",
+  "Hash": "r5fap9G8tJ6Rdo1A2skEBmqUWVJQgaNREbkGNkYImL8=",
   "Source": "ProyectoFinal",
   "BasePath": "_content/ProyectoFinal",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\addie\\Desktop\\Itla\\Cuatrimestre 5\\Programacion II\\ProyectoFinal\\ProyectoFinal\\wwwroot\\imagenes\\19ddd0f9-1b81-49e1-9874-f4618f5f8e72.png",
+      "SourceId": "ProyectoFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\addie\\Desktop\\Itla\\Cuatrimestre 5\\Programacion II\\ProyectoFinal\\ProyectoFinal\\wwwroot\\",
+      "BasePath": "_content/ProyectoFinal",
+      "RelativePath": "imagenes/19ddd0f9-1b81-49e1-9874-f4618f5f8e72.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\19ddd0f9-1b81-49e1-9874-f4618f5f8e72.png"
+    },
+    {
+      "Identity": "C:\\Users\\addie\\Desktop\\Itla\\Cuatrimestre 5\\Programacion II\\ProyectoFinal\\ProyectoFinal\\wwwroot\\imagenes\\6750ab62-74c4-442e-97a6-5f89ed62e1d2.png",
+      "SourceId": "ProyectoFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\addie\\Desktop\\Itla\\Cuatrimestre 5\\Programacion II\\ProyectoFinal\\ProyectoFinal\\wwwroot\\",
+      "BasePath": "_content/ProyectoFinal",
+      "RelativePath": "imagenes/6750ab62-74c4-442e-97a6-5f89ed62e1d2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\6750ab62-74c4-442e-97a6-5f89ed62e1d2.png"
     },
     {
       "Identity": "C:\\Users\\addie\\Desktop\\Itla\\Cuatrimestre 5\\Programacion II\\ProyectoFinal\\ProyectoFinal\\wwwroot\\js\\site.js",

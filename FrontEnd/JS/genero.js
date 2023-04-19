@@ -131,7 +131,7 @@ $(document).on("click", ".editar", function () {
         <section class="py-5 text-center container">
           <div class="row py-lg-5">
               <div class="col-lg-6 col-md-8 mx-auto">
-                  <h1 class="fw-light">Crear Peliuclas</h1>
+                  <h1 class="fw-light">Crear Generos</h1>
                   <p class="lead text-muted">Una aplicacion hecha para crear Peliculas.</p>
                   <p>
                       <a href="#" id="create" class="btn btn-secondary my-2">Crear un nuevo Genero</a>

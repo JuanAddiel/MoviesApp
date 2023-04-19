@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProyectoFinal.Contracts;
 using ProyectoFinal.Model;
 using ProyectoFinal.Services;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace ProyectoFinal.Controllers
 {
@@ -13,12 +14,14 @@ namespace ProyectoFinal.Controllers
     {
         ICRUDServices<Pelicula> _peliculaService;
         PeliculasContext dbCOntext;
+        IImagen imagen;
+        private readonly IHostingEnvironment hosting;
 
-
-        public PeliculaController(PeliculasContext dbContext)
+        public PeliculaController(PeliculasContext dbContext, IHostingEnvironment hosting)
         {
             _peliculaService = new CRUDServices<Pelicula>(dbContext);
             dbCOntext = dbContext;
+            this.hosting = hosting;
         }
 
         [HttpGet("getPeliculasBy")]
@@ -66,41 +69,46 @@ namespace ProyectoFinal.Controllers
         }
 
 
-        private  string Upload(IFormFile file, int id)
-        {
-            string basePath = $"/Movies/{id}";
-            string path = Path.Combine(Directory.GetCurrentDirectory(), $"Imagen{basePath}");
-            if(!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            Guid guid = Guid.NewGuid();
-            FileInfo fileinfo = new(file.FileName);
-            string fileName = guid+fileinfo.Extension;
-            string filenNameWithPath = Path.Combine(path, fileName);
-            using (var stream = new FileStream(filenNameWithPath, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            return Path.Combine(basePath,fileName);
-        }
-
-
         [HttpPost("createPelicula")]
-        public async Task<ActionResult<Pelicula>> CrearPelicula([FromForm] Pelicula pelicula)
+        public async Task<ActionResult<Pelicula>> CrearPelicula([FromForm] Pelicula pelicula, [FromForm] IFormFile imagen)
         {
-       
+            // Comprueba si se ha proporcionado una imagen.
+            string rutaImagen = null;
+            if (imagen != null)
+            {
+                // Genera un nombre de archivo único para la imagen.
+                string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);
 
+                // Obtiene la ruta de la carpeta "imagenes".
+                string carpetaImagenes = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "imagen");
+
+                // Crea la carpeta si no existe.
+                if (!Directory.Exists(carpetaImagenes))
+                {
+                    Directory.CreateDirectory(carpetaImagenes);
+                }
+
+                // Guarda la imagen en el sistema de archivos.
+                rutaImagen = Path.Combine(carpetaImagenes, nombreArchivo);
+                using (var stream = new FileStream(rutaImagen, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(stream);
+                }
+
+                // Asigna la ruta de la imagen a la propiedad de imagen de la película.
+                pelicula.Imagen = nombreArchivo;
+            }
+            else
+            {
+                // Si no se ha proporcionado una imagen, asigna una ruta predeterminada.
+                pelicula.Imagen = "rutaPredeterminada.jpg";
+            }
+
+            // Llama al método Create en el servicio de películas y devuelve el resultado.
             var resultado = await _peliculaService.Create(pelicula);
-
-
-            var imagePath = Upload(pelicula.Archivo, resultado.Id);
-            pelicula.Imagen = imagePath;
-
             return Ok(resultado);
         }
+
 
 
         [HttpGet("getPelicula")]
@@ -115,8 +123,34 @@ namespace ProyectoFinal.Controllers
         }
 
         [HttpPut("updatePelicula/{id}")]
-        public async Task<ActionResult<Pelicula>> ActualizarPelicula(int id, Pelicula pelicula)
+        public async Task<ActionResult<Pelicula>> ActualizarPelicula(int id, [FromForm] Pelicula pelicula, [FromForm] IFormFile imagen)
         {
+            string rutaImagen = null;
+            if (imagen != null)
+            {
+                // Genera un nombre de archivo único para la imagen.
+                string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(imagen.FileName);
+
+                // Obtiene la ruta de la carpeta "imagenes".
+                string carpetaImagenes = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "imagen");
+
+
+                // Crea la carpeta si no existe.
+                if (!Directory.Exists(carpetaImagenes))
+                {
+                    Directory.CreateDirectory(carpetaImagenes);
+                }
+
+                // Guarda la imagen en el sistema de archivos.
+                rutaImagen = Path.Combine(carpetaImagenes, nombreArchivo);
+                using (var stream = new FileStream(rutaImagen, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(stream);
+                }
+
+                // Asigna la ruta de la imagen a la propiedad de imagen de la película.
+                pelicula.Imagen = nombreArchivo;
+            }
             var resultado = await _peliculaService.Update(pelicula, id);
             if (resultado == null)
             {
@@ -134,6 +168,21 @@ namespace ProyectoFinal.Controllers
                 return NotFound();
             }
             return Ok(resultado);
+        }
+
+        private bool IsImageValid(IFormFile file)
+        {
+            if (file.ContentType.ToLower() != "image/jpg" &&
+                file.ContentType.ToLower() != "image/jpeg" &&
+                file.ContentType.ToLower() != "image/pjpeg" &&
+                file.ContentType.ToLower() != "image/gif" &&
+                file.ContentType.ToLower() != "image/x-png" &&
+                file.ContentType.ToLower() != "image/png")
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

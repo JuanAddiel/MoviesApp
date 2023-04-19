@@ -270,3 +270,5 @@ C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\Proyect
 C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\ProyectoFinal\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\ProyectoFinal\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\ProyectoFinal\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\ProyectoFinal\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\addie\Desktop\Itla\Cuatrimestre 5\Programacion II\ProyectoFinal\ProyectoFinal\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

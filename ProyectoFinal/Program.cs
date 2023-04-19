@@ -18,6 +18,7 @@ builder.Services.AddSqlServer<PeliculasContext>(builder.Configuration.GetConnect
 builder.Services.AddDbContext<PeliculasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MoviesPlayer")));
 builder.Services.AddScoped<ICRUDServices<Genero>, CRUDServices<Genero>>();
 builder.Services.AddScoped<ICRUDServices<Pelicula>, CRUDServices<Pelicula>>();
+builder.Services.AddScoped<ILoginServices, LoginServices>();
 builder.Services.AddControllers(
 options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 

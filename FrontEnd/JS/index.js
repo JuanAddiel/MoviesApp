@@ -2,7 +2,8 @@ $(document).ready(function () {
   movieList();
   
  
-  
+  const miVariable = localStorage.getItem("miVariable");
+console.log(miVariable);
   
   {/* */}
   
@@ -53,7 +54,8 @@ $(document).ready(function () {
      console.log(response)
       const data = await response.json();
       console.log(data);
-      filtrodor(data); // display the filtered movie data
+      const filteredData = data.filter(x => x.usuarioId === parseInt(miVariable));
+      filtrodor(filteredData); // display the filtered movie data
       Reset();
     } catch (error) {
       console.error(error);
@@ -83,7 +85,9 @@ $(document).ready(function () {
         throw new Error('Error al obtener datos');
       }
       const data = await response.json();
-      showData(data);
+      const filteredData = data.filter(x => x.usuarioId === parseInt(miVariable));
+
+      showData(filteredData);
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +109,7 @@ $(document).ready(function () {
             <div class="card-body">
       
               <h4 class="card-title">${element.titulo}</h4>
-              <img src="${element.imagen}"class="card-img-top img-responsive" alt="${element.titulo}">
+              <img src="/../../imagen/${element.imagen}" class="card-img-top img-responsive" alt="${element.titulo}">
               <h5 class="card-title">Año publicacion: ${fecha.getFullYear()}</h5>
               <h5 class="card-title">Director: ${element.director}</h5>
               <h5 class="card-title" id="nombre">Genero: ${nombreGenero}</h5> <!-- utilizamos la variable 'nombreGenero' aquí -->
@@ -115,6 +119,7 @@ $(document).ready(function () {
             
           </div>
         </div> `;
+        console.log(element.imagen)
       }));
   
       $("#card").html(verdata);
@@ -160,7 +165,7 @@ $(document).ready(function () {
             <div class="card-body">
       
               <h4 class="card-title">${element.titulo}</h4>
-              <img src="${element.imagen}"class="card-img-top img-responsive" alt="${element.titulo}">
+              <img src="/../../imagen/${element.imagen}" class="card-img-top img-responsive" alt="${element.titulo}">
               <h5 class="card-title">Año publicacion: ${fecha.getFullYear()}</h5>
               <h5 class="card-title">Director: ${element.director}</h5>
               <h5 class="card-title" id="nombre">Genero: ${nombreGenero}</h5> <!-- utilizamos la variable 'nombreGenero' aquí -->
@@ -191,7 +196,7 @@ $(document).ready(function () {
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Obserrvar Peliculas</h1>
+                <h1 class="fw-light">Observar Peliculas</h1>
                 <p class="lead text-muted">Una aplicacion hecha para crear Peliculas.</p>
             </div>
         </div>

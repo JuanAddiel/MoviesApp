@@ -12,13 +12,7 @@ namespace ProyectoFinal.Model
         public string Titulo { get; set; }
         public DateTime Año { get ; set; }
         public string Director { get; set; }
-
         public string Imagen { get; set; }
-
-        [NotMapped]
-        public IFormFile Archivo { get; set; }
-
-   
         [JsonIgnore]
         public Usuario Usuario { get; set; }
         [JsonIgnore]
